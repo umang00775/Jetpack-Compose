@@ -24,7 +24,8 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Green),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 Text(text = "Hello")
                 Text(text = " World!")
