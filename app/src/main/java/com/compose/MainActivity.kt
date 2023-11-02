@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -37,65 +40,43 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val fontFamily = FontFamily(
-            Font(R.font.firasans_regular, FontWeight.Bold),
-            Font(R.font.firasans_regular, FontWeight.Black)
-        )
-
         setContent {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xFF101010))
-            ) {
-                Text(
-                    text = buildAnnotatedString{
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Green,
-                                fontSize = 40.sp
-                            )
-                        ){
-                            append("L")
-                        }
-                        append("earning ")
-
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Green,
-                                fontSize = 40.sp
-                            )
-                        ){
-                            append("J")
-                        }
-                        append("etpack ")
-
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Green,
-                                fontSize = 40.sp
-                            )
-                        ){
-                            append("C")
-                        }
-                        append("ompose")
-                    },
-
-                    color = Color.White,
-                    fontSize = 25.sp,
-                    fontFamily = fontFamily,
-                    fontStyle = FontStyle.Italic,
-                    textAlign = TextAlign.Center,
-                    textDecoration = TextDecoration.Underline
-                )
-            }
+            ColorBox(
+                modifier = Modifier.fillMaxSize(1f)
+            )
         }
     }
 }
+
+@Composable
+fun ColorBox(modifier: Modifier = Modifier) {
+    val color = remember {
+        mutableStateOf(Color.Yellow)
+    }
+
+    Box( modifier = modifier
+        .background(color.value)
+        .clickable {
+            color.value = Color(
+                Random.nextFloat(),
+                Random.nextFloat(),
+                Random.nextFloat(),
+                1f
+            )
+        }
+    ) {
+
+    }
+}
+
+
+
 
 @Preview(showBackground = true)
 @Composable
