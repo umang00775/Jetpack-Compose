@@ -1,5 +1,6 @@
 package com.compose
 
+import android.graphics.Paint.Style
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontSynthesis.Companion.Style
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,67 +33,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.img)
-            val contentDisc = "He he"
-            val title = "I am the title :)"
-
-            Box(modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(16.dp)
-            ){
-                ImageCard(
-                    painter = painter,
-                    contentDescription = contentDisc,
-                    title = title
-                )
-            }
-
-        }
-    }
-}
-
-@Composable
-fun ImageCard(
-    painter: Painter,
-    contentDescription: String,
-    title: String,
-    modifier: Modifier = Modifier
-){
-    Card( modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
-    ) {
-        Box(modifier = Modifier.height(200.dp)){
-            Image(
-                painter = painter,
-                contentDescription = contentDescription,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop,
-            )
             Box(modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black
-                        ),
-                        startY = 300f
-                    )
-                )
-            )
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp),
-                contentAlignment = Alignment.BottomStart
+                .background(Color(0xFF101010))
             ) {
-                Text(text = title, style = TextStyle(color = Color.White), fontSize = 16.sp)
+                Text(
+                    text = "Learning Jetpack Compose!!",
+                    color = Color.White,
+                    fontSize = 30.sp
+                )
             }
-
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
