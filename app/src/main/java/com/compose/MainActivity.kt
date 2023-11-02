@@ -47,32 +47,47 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            ColorBox(
-                modifier = Modifier.fillMaxSize(1f)
-            )
+            Column(Modifier.fillMaxSize()) {
+                val color = remember {
+                    mutableStateOf(Color.Yellow)
+                }
+
+                ColorBox(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize(1f)
+                ){
+                    color.value = it
+                }
+                Box(Modifier
+                    .background(color.value)
+                    .weight(1f)
+                    .fillMaxSize(1f)
+                )
+            }
         }
     }
 }
 
 @Composable
-fun ColorBox(modifier: Modifier = Modifier) {
-    val color = remember {
-        mutableStateOf(Color.Yellow)
-    }
+fun ColorBox(
+    modifier: Modifier = Modifier,
+    updateColor: (Color) -> Unit
+) {
 
     Box( modifier = modifier
-        .background(color.value)
+        .background(Color.Yellow)
         .clickable {
-            color.value = Color(
-                Random.nextFloat(),
-                Random.nextFloat(),
-                Random.nextFloat(),
-                1f
+            updateColor(
+                Color(
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    1f
+                )
             )
         }
-    ) {
-
-    }
+    )
 }
 
 
